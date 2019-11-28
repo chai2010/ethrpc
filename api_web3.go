@@ -17,13 +17,13 @@ func NewWeb3API(host string) Web3API {
 
 // 返回远程客户端的版本信息
 func Web3ClientVersion(host string) (version string, err error) {
-	err = jsonrpcCall(host, "web3_clientVersion", &version)
+	err = ethrpcCall(host, "web3_clientVersion", &version)
 	return
 }
 
 // 返回Keccak-256哈希
 func Web3Sha3(host string, data []byte) (hash string, err error) {
-	err = jsonrpcCall(host, "web3_sha3", &hash, fmt.Sprintf("0x%x", data))
+	err = ethrpcCall(host, "web3_sha3", &hash, fmt.Sprintf("0x%x", data))
 	return
 }
 

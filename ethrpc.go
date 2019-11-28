@@ -24,19 +24,26 @@ type ethResponse struct {
 	ID      int             `json:"id"`
 	JSONRPC string          `json:"jsonrpc"`
 	Result  json.RawMessage `json:"result"`
-	Error   *EthError       `json:"error"`
+	Error   *Error          `json:"error"`
 }
 
-type EthError struct {
+// JSONRPC错误
+type Error struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 }
 
-func (err *EthError) Error() string {
-	return fmt.Sprintf("EthError{code:%d, message: %q}", err.Code, err.Message)
+func (err *Error) Error() string {
+	return fmt.Sprintf("ethrpc.Error{code:%d, message: %q}", err.Code, err.Message)
 }
 
-func jsonrpcCall(host, method string, response interface{}, args ...interface{}) (err error) {
+// 原生调用方法
+func Call(host, method string, args ...interface{}) (result json.RawMessage, err error) {
+	return jsonrpcCall(host, method, args...)
+}
+
+// jsonrpc调用
+func jsonrpcCall(host, method string, args ...interface{}) (result json.RawMessage, err error) {
 	reqBody, err := json.Marshal(&ethRequest{
 		JSONRPC: "2.0",
 		Method:  method,
@@ -44,34 +51,39 @@ func jsonrpcCall(host, method string, response interface{}, args ...interface{})
 		ID:      1,
 	})
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	r, err := http.Post(host, "application/json", bytes.NewReader(reqBody))
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer r.Body.Close()
 
 	respBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	var resp = new(ethResponse)
 	if err := json.Unmarshal(respBody, resp); err != nil {
-		return err
+		return nil, err
 	}
 	if resp.Error != nil {
-		return resp.Error
+		return nil, resp.Error
 	}
 
-	if err := json.Unmarshal(resp.Result, response); err != nil {
+	return resp.Result, nil
+}
+
+// 以太坊RPC调用, 需要通过response提供返回类型
+func ethrpcCall(host, method string, response interface{}, args ...interface{}) (err error) {
+	resp_Result, err := jsonrpcCall(host, method, args...)
+	if err != nil {
 		return err
 	}
-	if resp.Error != nil {
-		return resp.Error
+	if err := json.Unmarshal(resp_Result, response); err != nil {
+		return err
 	}
-
 	return nil
 }
