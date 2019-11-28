@@ -1,10 +1,7 @@
-# 以太坊山寨RPC客户端
+// 以太坊山寨RPC客户端 版权 @2019 柴树杉。
 
-官方以太坊客户端太重，其中更是间接依赖了CGO特性。因此山寨一个以太坊RPC客户端。
+// +build ignore
 
-## 例子
-
-```go
 package main
 
 import (
@@ -22,8 +19,3 @@ func main() {
 	hash, err := ethrpc.Web3Sha3("https://ropsten.infura.io", []byte(""))
 	fmt.Println(hash, err)
 }
-```
-
-## 版权
-
-版权 @2019 柴树杉
