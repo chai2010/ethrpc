@@ -4,6 +4,7 @@ package ethrpc
 
 import (
 	"encoding/json"
+	"fmt"
 	"math/big"
 	"strings"
 )
@@ -99,18 +100,77 @@ func EthGetBalance(host string, address, block string) (balance *big.Int, err er
 	return parseBigint(s)
 }
 
+// 获取存储器数据
+func EthGetStorageAt(host string, address string, pos int, block string) (data string, err error) {
+	err = ethrpcCall(host, "eth_getStorageAt", &data, address, fmt.Sprintf("0x%x", pos), block)
+	return
+}
+
+// 获取账户发出的交易数目
+func EthGetTransactionCount(host string, address, block string) (n int64, err error) {
+	var s string
+	err = ethrpcCall(host, "eth_getTransactionCount", &s, address, block)
+	return parseInt64(s)
+}
+
+// 获取账户发出的交易数目
+func EthGetBlockTransactionCountByHash(host string, hash string) (n int64, err error) {
+	var s string
+	err = ethrpcCall(host, "eth_getBlockTransactionCountByHash", &s, hash)
+	return parseInt64(s)
+}
+
+// 获取账户发出的交易数目
+func EthGetBlockTransactionCountByNumber(host string, number int64) (n int64, err error) {
+	var s string
+	err = ethrpcCall(host, "eth_getBlockTransactionCountByNumber", &s, fmt.Sprintf("0x%x", number))
+	return parseInt64(s)
+}
+
+// 获取叔叔区块的数目
+func EthGetUncleCountByBlockHash(host string, hash string) (n int64, err error) {
+	var s string
+	err = ethrpcCall(host, "eth_getUncleCountByBlockHash", &s, hash)
+	return parseInt64(s)
+
+}
+
+// 获取叔叔区块的数目
+func EthGetUncleCountByBlockNumber(host string, number int64) (n int64, err error) {
+	var s string
+	err = ethrpcCall(host, "eth_getUncleCountByBlockNumber", &s, fmt.Sprintf("0x%x", number))
+	return parseInt64(s)
+}
+
+// 获取合约字节码
+func EthGetCode(host string, block string) (code string, err error) {
+	err = ethrpcCall(host, "eth_getCode", &code, block)
+	return
+}
+
+// 对数据进行签名
+// 注意: 签名的账户必须处于解锁状态
+// sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message)))
+func EthSign(host string, message string) (sign string, err error) {
+	err = ethrpcCall(host, "eth_sign", &sign, message)
+	return
+}
+
+// 发送交易数据
+func EthSendTransaction(host string, tx *TxIn) (hash string, err error) {
+	err = ethrpcCall(host, "eth_sendTransaction", &hash, tx)
+	return
+}
+
+// 发送原生的交易数据
+// 离线生成交易数据并签名后的数据
+func EthSendRawTransaction(host string, rawtx string) (hash string, err error) {
+	err = ethrpcCall(host, "eth_sendRawTransaction", &hash, rawtx)
+	return
+}
+
 /*
 
-eth_getStorageAt
-eth_getTransactionCount
-eth_getBlockTransactionCountByHash
-eth_getBlockTransactionCountByNumber
-eth_getUncleCountByBlockHash
-eth_getUncleCountByBlockNumber
-eth_getCode
-eth_sign
-eth_sendTransaction
-eth_sendRawTransaction
 eth_call
 eth_estimateGas
 eth_getBlockByHash
