@@ -202,29 +202,148 @@ func EthEstimateGas(host string, tx *TxIn) (result int64, err error) {
 	return parseInt64(s)
 }
 
-/*
-eth_getBlockByHash
-eth_getBlockByNumber
-eth_getTransactionByHash
-eth_getTransactionByBlockHashAndIndex
-eth_getTransactionByBlockNumberAndIndex
-eth_getTransactionReceipt
-eth_pendingTransactions
-eth_getUncleByBlockHashAndIndex
-eth_getUncleByBlockNumberAndIndex
-eth_getCompilers
-eth_compileLLL
-eth_compileSolidity
-eth_compileSerpent
-eth_newFilter
-eth_newBlockFilter
-eth_newPendingTransactionFilter
-eth_uninstallFilter
-eth_getFilterChanges
-eth_getFilterLogs
-eth_getLogs
-eth_getWork
-eth_submitWork
-eth_submitHashrate
-eth_getProof
-*/
+// todo list
+
+func eth_getBlockByHash(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getBlockByHash", &todo)
+	return
+}
+
+func eth_getBlockByNumber(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getBlockByNumber", &todo)
+	return
+}
+
+func eth_getTransactionByHash(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getTransactionByHash", &todo)
+	return
+}
+
+func eth_getTransactionByBlockHashAndIndex(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getTransactionByBlockHashAndIndex", &todo)
+	return
+}
+
+func eth_getTransactionByBlockNumberAndIndex(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getTransactionByBlockNumberAndIndex", &todo)
+	return
+}
+
+func eth_getTransactionReceipt(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getTransactionReceipt", &todo)
+	return
+}
+
+func eth_pendingTransactions(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_pendingTransactions", &todo)
+	return
+}
+
+func eth_getUncleByBlockHashAndIndex(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getUncleByBlockHashAndIndex", &todo)
+	return
+}
+
+func eth_getUncleByBlockNumberAndIndex(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getUncleByBlockNumberAndIndex", &todo)
+	return
+}
+
+func eth_getCompilers(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getCompilers", &todo)
+	return
+}
+
+func eth_compileLLL(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_compileLLL", &todo)
+	return
+}
+
+func eth_compileSolidity(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_compileSolidity", &todo)
+	return
+}
+
+func eth_compileSerpent(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_compileSerpent", &todo)
+	return
+}
+
+func eth_newFilter(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_newFilter", &todo)
+	return
+}
+
+func eth_newBlockFilter(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_newBlockFilter", &todo)
+	return
+}
+
+func eth_newPendingTransactionFilter(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_newPendingTransactionFilter", &todo)
+	return
+}
+
+func eth_uninstallFilter(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_uninstallFilter", &todo)
+	return
+}
+
+func eth_getFilterChanges(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getFilterChanges", &todo)
+	return
+}
+
+func eth_getFilterLogs(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getFilterLogs", &todo)
+	return
+}
+
+func eth_getLogs(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getLogs", &todo)
+	return
+}
+
+func eth_getWork(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getWork", &todo)
+	return
+}
+
+func eth_submitWork(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_submitWork", &todo)
+	return
+}
+
+func eth_submitHashrate(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_submitHashrate", &todo)
+	return
+}
+
+func eth_getProof(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "eth_getProof", &todo)
+	return
+}

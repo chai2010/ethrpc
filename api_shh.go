@@ -2,15 +2,64 @@
 
 package ethrpc
 
-/*
-shh_post
-shh_version
-shh_newIdentity
-shh_hasIdentity
-shh_newGroup
-shh_addToGroup
-shh_newFilter
-shh_uninstallFilter
-shh_getFilterChanges
-shh_getMessages
-*/
+// todo ist
+
+func shh_post(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_post", &todo)
+	return
+}
+
+func shh_version(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_version", &todo)
+	return
+}
+
+func shh_newIdentity(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_newIdentity", &todo)
+	return
+}
+
+func shh_hasIdentity(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_hasIdentity", &todo)
+	return
+}
+
+func shh_newGroup(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_newGroup", &todo)
+	return
+}
+
+func shh_addToGroup(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_addToGroup", &todo)
+	return
+}
+
+func shh_newFilter(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_newFilter", &todo)
+	return
+}
+
+func shh_uninstallFilter(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_uninstallFilter", &todo)
+	return
+}
+
+func shh_getFilterChanges(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_getFilterChanges", &todo)
+	return
+}
+
+func shh_getMessages(host string) (err error) {
+	var todo string
+	err = ethrpcCall(host, "shh_getMessages", &todo)
+	return
+}

@@ -49,3 +49,25 @@ func (p *TxIn) MarshalJSON() ([]byte, error) {
 
 	return json.Marshal(x)
 }
+
+type Block struct {
+	Number           int64
+	Hash             string
+	ParentHash       string
+	Nonce            int64
+	Sha3Uncles       string
+	LogsBloom        string
+	TransactionsRoot string
+	StateRoot        string
+	ReceiptsRoot     string
+	Miner            string
+	Difficulty       *big.Int
+	TotalDifficulty  *big.Int
+	ExtraData        string
+	Size             int64
+	GasLimit         *big.Int
+	GasUsed          *big.Int
+	Timestamp        int64
+	//Transactions     []Transaction
+	Uncles []string
+}
