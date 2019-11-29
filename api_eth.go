@@ -97,6 +97,9 @@ func EthBlockNumber(host string) (blockNumber int64, err error) {
 func EthGetBalance(host string, address, block string) (balance *big.Int, err error) {
 	var s string
 	err = ethrpcCall(host, "eth_getBalance", &s, address, block)
+	if err != nil {
+		return nil, err
+	}
 	return parseBigint(s)
 }
 
@@ -110,6 +113,9 @@ func EthGetStorageAt(host string, address string, pos int, block string) (data s
 func EthGetTransactionCount(host string, address, block string) (n int64, err error) {
 	var s string
 	err = ethrpcCall(host, "eth_getTransactionCount", &s, address, block)
+	if err != nil {
+		return 0, err
+	}
 	return parseInt64(s)
 }
 
@@ -117,6 +123,9 @@ func EthGetTransactionCount(host string, address, block string) (n int64, err er
 func EthGetBlockTransactionCountByHash(host string, hash string) (n int64, err error) {
 	var s string
 	err = ethrpcCall(host, "eth_getBlockTransactionCountByHash", &s, hash)
+	if err != nil {
+		return 0, err
+	}
 	return parseInt64(s)
 }
 
@@ -124,6 +133,9 @@ func EthGetBlockTransactionCountByHash(host string, hash string) (n int64, err e
 func EthGetBlockTransactionCountByNumber(host string, number int64) (n int64, err error) {
 	var s string
 	err = ethrpcCall(host, "eth_getBlockTransactionCountByNumber", &s, fmt.Sprintf("0x%x", number))
+	if err != nil {
+		return 0, err
+	}
 	return parseInt64(s)
 }
 
@@ -131,14 +143,19 @@ func EthGetBlockTransactionCountByNumber(host string, number int64) (n int64, er
 func EthGetUncleCountByBlockHash(host string, hash string) (n int64, err error) {
 	var s string
 	err = ethrpcCall(host, "eth_getUncleCountByBlockHash", &s, hash)
+	if err != nil {
+		return 0, err
+	}
 	return parseInt64(s)
-
 }
 
 // 获取叔叔区块的数目
 func EthGetUncleCountByBlockNumber(host string, number int64) (n int64, err error) {
 	var s string
 	err = ethrpcCall(host, "eth_getUncleCountByBlockNumber", &s, fmt.Sprintf("0x%x", number))
+	if err != nil {
+		return 0, err
+	}
 	return parseInt64(s)
 }
 
@@ -169,10 +186,23 @@ func EthSendRawTransaction(host string, rawtx string) (hash string, err error) {
 	return
 }
 
-/*
+// 调用合约函数
+func EthCall(host string, tx *TxIn, tag string) (result string, err error) {
+	err = ethrpcCall(host, "eth_call", &result, tx, tag)
+	return
+}
 
-eth_call
-eth_estimateGas
+// 估算执行合约函数需要的Gas数目
+func EthEstimateGas(host string, tx *TxIn) (result int64, err error) {
+	var s string
+	err = ethrpcCall(host, "eth_estimateGas", &s, tx)
+	if err != nil {
+		return 0, err
+	}
+	return parseInt64(s)
+}
+
+/*
 eth_getBlockByHash
 eth_getBlockByNumber
 eth_getTransactionByHash
