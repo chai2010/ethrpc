@@ -23,7 +23,7 @@ type TxIn struct {
 	GasPrice string
 	Value    string
 	Data     string
-	Nonce    string
+	Nonce    string // 可以缺省
 }
 
 // 查询返回的交易数据

@@ -94,6 +94,7 @@ func EthBlockNumber(host string) (blockNumber int64, err error) {
 }
 
 // 查询账户余额
+// block 是区块编号, 或者是 latest/earliest/pending
 func EthGetBalance(host string, address, block string) (balance *big.Int, err error) {
 	var s string
 	err = ethrpcCall(host, "eth_getBalance", &s, address, block)
@@ -109,7 +110,7 @@ func EthGetStorageAt(host string, address string, pos int, block string) (data s
 	return
 }
 
-// 获取账户发出的交易数目
+// 获取账户发出的交易数目(下一个Nonce)
 func EthGetTransactionCount(host string, address, block string) (n int64, err error) {
 	var s string
 	err = ethrpcCall(host, "eth_getTransactionCount", &s, address, block)
