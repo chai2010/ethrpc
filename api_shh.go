@@ -2,43 +2,37 @@
 
 package ethrpc
 
+func shh_version(host string) (version string, err error) {
+	err = ethrpcCall(host, "shh_version", &version)
+	return
+}
+
+func shh_post(host string, msg *ShhPostObject) (ok bool, err error) {
+	err = ethrpcCall(host, "shh_post", &ok, msg)
+	return
+}
+
+func shh_newIdentity(host string) (id string, err error) {
+	err = ethrpcCall(host, "shh_newIdentity", &id)
+	return
+}
+
+func shh_hasIdentity(host, id string) (exists bool, err error) {
+	err = ethrpcCall(host, "shh_hasIdentity", &exists, id)
+	return
+}
+
+func shh_newGroup(host string) (id string, err error) {
+	err = ethrpcCall(host, "shh_newGroup", &id)
+	return
+}
+
+func shh_addToGroup(host, id string) (ok bool, err error) {
+	err = ethrpcCall(host, "shh_addToGroup", &ok, id)
+	return
+}
+
 // todo ist
-
-func shh_post(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "shh_post", &todo)
-	return
-}
-
-func shh_version(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "shh_version", &todo)
-	return
-}
-
-func shh_newIdentity(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "shh_newIdentity", &todo)
-	return
-}
-
-func shh_hasIdentity(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "shh_hasIdentity", &todo)
-	return
-}
-
-func shh_newGroup(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "shh_newGroup", &todo)
-	return
-}
-
-func shh_addToGroup(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "shh_addToGroup", &todo)
-	return
-}
 
 func shh_newFilter(host string) (err error) {
 	var todo string

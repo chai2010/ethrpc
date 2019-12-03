@@ -4,7 +4,6 @@ package ethrpc
 
 import (
 	"encoding/json"
-	"fmt"
 	"math/big"
 )
 
@@ -18,36 +17,48 @@ type SyncingStatus struct {
 
 // 输入的交易数据
 type TxIn struct {
-	From     string
+	From     string // 不参与签名
 	To       string
-	Gas      int64
-	GasPrice *big.Int
-	Value    *big.Int
+	Gas      string
+	GasPrice string
+	Value    string
 	Data     string
-	Nonce    int64
+	Nonce    string
 }
 
-// 编码为JSON
-func (p *TxIn) MarshalJSON() ([]byte, error) {
-	var x = struct {
-		From     string `json:"from"`
-		To       string
-		Gas      string
-		GasPrice string
-		Value    string
-		Data     string
-		Nonce    string
-	}{
-		From:     p.From,
-		To:       p.To,
-		Gas:      fmt.Sprintf("0x%x", p.Gas),
-		GasPrice: fmt.Sprintf("0x%x", p.GasPrice),
-		Value:    fmt.Sprintf("0x%x", p.Value),
-		Data:     p.Data,
-		Nonce:    fmt.Sprintf("0x%x", p.Nonce),
-	}
+// 查询返回的交易数据
+type TxResult struct {
+	BlockHash        string `json:"blockHash"`
+	BlockNumber      string `json:"blockNumber"`
+	From             string `json:"from"`
+	Gas              string `json:"gas"`
+	GasPrice         string `json:"gasPrice"`
+	Hash             string `json:"hash"`
+	Input            string `json:"input"`
+	Nonce            string `json:"nonce"`
+	To               string `json:"to"`
+	TransactionIndex string `json:"transactionIndex"`
+	Value            string `json:"value"`
+	V                string `json:"v"`
+	R                string `json:"r"`
+	S                string `json:"s"`
+}
 
-	return json.Marshal(x)
+// 交易回执
+type TxReceipt struct {
+	TransactionHash   string          `json:"transactionHash"`
+	TransactionIndex  string          `json:"transactionIndex"`
+	BlockHash         string          `json:"blockHash"`
+	BlockNumber       string          `json:"blockNumber"`
+	From              string          `json:"from"`
+	To                string          `json:"to"`
+	CumulativeGasUsed string          `json:"cumulativeGasUsed"`
+	GasUsed           string          `json:"gasUsed"`
+	ContractAddress   string          `json:"contractAddress"`
+	Logs              json.RawMessage `json:"logs"`
+	LogsBloom         string          `json:"logsBloom"`
+	Root              string          `json:"root"`
+	Status            string          `json:"status"`
 }
 
 type Block struct {

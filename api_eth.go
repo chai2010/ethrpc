@@ -202,6 +202,30 @@ func EthEstimateGas(host string, tx *TxIn) (result int64, err error) {
 	return parseInt64(s)
 }
 
+// 根据hash查询交易信息
+func EthGetTransactionByHash(host, hash string) (tx TxResult, err error) {
+	err = ethrpcCall(host, "eth_getTransactionByHash", &tx, hash)
+	return
+}
+
+// 根据区块hash和偏移量查询交易信息
+func EthGetTransactionByBlockHashAndIndex(host, blockHash string, index int) (tx TxResult, err error) {
+	err = ethrpcCall(host, "eth_getTransactionByBlockHashAndIndex", &tx, blockHash, fmt.Sprintf("0x%x", index))
+	return
+}
+
+// 查询交易回执
+func EthGetTransactionReceipt(host, hash string) (txReceipt TxReceipt, err error) {
+	err = ethrpcCall(host, "eth_getTransactionReceipt", &txReceipt, hash)
+	return
+}
+
+// 查询等待处理的交易列表
+func EthPendingTransactions(host string) (txList []TxResult, err error) {
+	err = ethrpcCall(host, "eth_pendingTransactions", &txList)
+	return
+}
+
 // todo list
 
 func eth_getBlockByHash(host string) (err error) {
@@ -216,33 +240,9 @@ func eth_getBlockByNumber(host string) (err error) {
 	return
 }
 
-func eth_getTransactionByHash(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "eth_getTransactionByHash", &todo)
-	return
-}
-
-func eth_getTransactionByBlockHashAndIndex(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "eth_getTransactionByBlockHashAndIndex", &todo)
-	return
-}
-
 func eth_getTransactionByBlockNumberAndIndex(host string) (err error) {
 	var todo string
 	err = ethrpcCall(host, "eth_getTransactionByBlockNumberAndIndex", &todo)
-	return
-}
-
-func eth_getTransactionReceipt(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "eth_getTransactionReceipt", &todo)
-	return
-}
-
-func eth_pendingTransactions(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "eth_pendingTransactions", &todo)
 	return
 }
 
@@ -259,27 +259,19 @@ func eth_getUncleByBlockNumberAndIndex(host string) (err error) {
 }
 
 func eth_getCompilers(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "eth_getCompilers", &todo)
-	return
-}
-
-func eth_compileLLL(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "eth_compileLLL", &todo)
-	return
+	panic("DEPRECATED")
 }
 
 func eth_compileSolidity(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "eth_compileSolidity", &todo)
-	return
+	panic("DEPRECATED")
+}
+
+func eth_compileLLL(host string) (err error) {
+	panic("DEPRECATED")
 }
 
 func eth_compileSerpent(host string) (err error) {
-	var todo string
-	err = ethrpcCall(host, "eth_compileSerpent", &todo)
-	return
+	panic("DEPRECATED")
 }
 
 func eth_newFilter(host string) (err error) {
